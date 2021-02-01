@@ -15,20 +15,18 @@ struct User {
 
 class SignupViewController: UIViewController {
 
-	@IBOutlet weak var user_id: UITextField!
+	@IBOutlet weak var user_txt_field: UITextField!
 	@IBOutlet weak var submit_btn: UIButton!
-	@IBOutlet weak var typing_pattern: UITextField!
-	@IBOutlet weak var pattern_label: UILabel!
+	@IBOutlet weak var password_txt_field: UITextField!
 	
 	var networkManager = NetworkManager();
-	var pattern_string = "This is the typing pattern"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.submit_btn.setTitle("Signup", for: .normal)
-		self.pattern_label.text = pattern_string
 
-		TypingDNARecorderMobile.addTarget(typing_pattern)
+		TypingDNARecorderMobile.addTarget(user_txt_field)
+		TypingDNARecorderMobile.addTarget(password_txt_field)
     }
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -39,10 +37,10 @@ class SignupViewController: UIViewController {
 		//Remove the username / pattern from service
 		//This useful if you need to reset the typing pattern for a given user
 		//If textfield is empty, allow the user to enter a username to delete
-		if user_id.text!.count == 0 {
+		if user_txt_field.text!.count == 0 {
 			self.presentAlertTextField(title: "delete", message: "")
 		} else {
-			networkManager.remove_user(user_id: user_id.text!) { (json) in
+			networkManager.remove_user(user_id: user_txt_field.text!) { (json) in
 				print("remove user",json)
 				self.presentAlert(title: "User Deleted", message: "")
 			}
@@ -51,19 +49,15 @@ class SignupViewController: UIViewController {
 	
 	@IBAction func signupButtonTapped(_ sender: Any) {
 	
-		guard let userId = user_id.text, userId.count > 6 else {
+		guard let userId = user_txt_field.text, userId.count > 6 else {
 			presentAlert(title: "Username must be longer than 6 characters", message: "")
 			return
 		}
-		guard let password = typing_pattern.text, password.count > 6 else {
-			presentAlert(title: "Password must be longer than 6 characters", message: "")
-			return
-		}
-		
+	
 		//Save the response from both the /auto and /check API into this Struct.
 		var user = User()
 		
-		let typingPattern = TypingDNARecorderMobile.getTypingPattern(1, 0, "", 0, typing_pattern);
+		let typingPattern = TypingDNARecorderMobile.getTypingPattern(1, 0, "", 0, nil);
 		networkManager.save_pattern(user_id: userId, typing_pattern: typingPattern) { (json) in
 			user.pattern_response = json
 			
@@ -123,13 +117,13 @@ class SignupViewController: UIViewController {
 	}
 	
 	func presentAlert(title:String, message:String) {
-		print("ALERT: \(title) Message: \(message)")
+//		print("ALERT: \(title) Message: \(message)")
 		DispatchQueue.main.async {
 			let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
 			alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
 				//Clear text fields
-				self.user_id.text = "";
-				self.typing_pattern.text = ""
+				self.user_txt_field.text = "";
+				self.password_txt_field.text = ""
 				//reset recorder in order to prevent sending duplicate typing pattern
 				TypingDNARecorderMobile.reset(true);
 			}))

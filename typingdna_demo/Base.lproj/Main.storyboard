@@ -38,14 +38,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YDk-Mc-aZD">
-                                <rect key="frame" x="66" y="271" width="243" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YDk-Mc-aZD">
+                                <rect key="frame" x="66" y="201" width="243" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="If you already registered in the demo, enter your previous email to be verified by typing biometrics." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLY-cy-rUR">
-                                <rect key="frame" x="20" y="313" width="374" height="67"/>
+                                <rect key="frame" x="20" y="243" width="374" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -56,20 +56,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xba-if-hyN">
-                                <rect key="frame" x="138" y="412" width="99" height="30"/>
+                                <rect key="frame" x="138" y="342" width="99" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Next"/>
                                 <connections>
                                     <action selector="signupButtonTapped:" destination="6wB-MN-i1D" eventType="touchUpInside" id="Gvp-hs-7cj"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please enter the following pattern:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2G-p7-3lm">
-                                <rect key="frame" x="20" y="211" width="374" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LqA-bu-JNY">
                                 <rect key="frame" x="20" y="236" width="374" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -83,10 +76,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="pfs-uZ-JBH"/>
                     <connections>
-                        <outlet property="pattern_label" destination="LqA-bu-JNY" id="mJH-Qh-rWT"/>
+                        <outlet property="password_txt_field" destination="YDk-Mc-aZD" id="kDB-7n-8Rx"/>
                         <outlet property="submit_btn" destination="xba-if-hyN" id="3z3-MH-e3w"/>
-                        <outlet property="typing_pattern" destination="YDk-Mc-aZD" id="tHg-Qe-hdh"/>
-                        <outlet property="user_id" destination="Sdd-QM-4xk" id="5Y7-Ep-rYg"/>
+                        <outlet property="user_txt_field" destination="Sdd-QM-4xk" id="gGa-4u-vx6"/>
                         <segue destination="PEX-0W-AKQ" kind="show" identifier="didLogin" id="47h-J9-mxf"/>
                     </connections>
                 </viewController>
