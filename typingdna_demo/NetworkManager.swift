@@ -13,9 +13,9 @@ class NetworkManager {
 	var api_key = "xx" // TypingDNA API Key
 	var api_secret = "xx" // TypingDNA API Secret
 	
-	func save_pattern(user_id:String, typing_pattern:String, completionHandler:@escaping (_ result:[String: Any]) -> Void) {
+	func save_pattern(username:String, typing_pattern:String, completionHandler:@escaping (_ result:[String: Any]) -> Void) {
 			
-			let hashed_user_id = MD5(string: user_id)
+			let hashed_user_id = MD5(string: username)
 			let serviceUrl = URL(string: base_url+"/auto/"+hashed_user_id)
 
 			let parameterDictionary = ["tp" : typing_pattern]
@@ -42,9 +42,9 @@ class NetworkManager {
 			   }.resume()
 		}
 	
-	func remove_user(user_id:String, completionHandler:@escaping (_ result:[String: Any]) -> Void) {
+	func remove_user(username:String, completionHandler:@escaping (_ result:[String: Any]) -> Void) {
 		
-		let hashed_user_id = MD5(string: user_id)
+		let hashed_user_id = MD5(string: username)
 		let serviceUrl = URL(string: base_url+"/user/"+hashed_user_id)
 
 		   var request = URLRequest(url: serviceUrl!)
@@ -71,9 +71,9 @@ class NetworkManager {
 		   }.resume()
 	}
 
-	func check_user(user_id:String, completionHandler:@escaping (_ result:[String: Any]) -> Void) {
+	func check_user(username:String, completionHandler:@escaping (_ result:[String: Any]) -> Void) {
 		
-		let hashed_user_id = MD5(string: user_id)
+		let hashed_user_id = MD5(string: username)
 		let serviceUrl = URL(string: base_url+"/user/"+hashed_user_id + "?type=1")
 
 		   var request = URLRequest(url: serviceUrl!)
