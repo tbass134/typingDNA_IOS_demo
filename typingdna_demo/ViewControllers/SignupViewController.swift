@@ -39,15 +39,9 @@ class SignupViewController: UIViewController {
 	@IBAction func deleteUser(_ sender: Any) {
 		//Remove the username / pattern from service
 		//This useful if you need to reset the typing pattern for a given user
-		//If textfield is empty, allow the user to enter a username to delete
-		if user_txt_field.text!.count == 0 {
-			self.presentAlertTextField(title: "delete", message: "")
-		} else {
-			networkManager.remove_user(username: user_txt_field.text!) { (json) in
-				print("remove user",json)
-				self.presentAlert(title: "User Deleted", message: "")
-			}
-		}
+		//Allows the user to enter a username to delete
+		self.presentAlertTextField(title: "Enter the username to remove", placeholder:"Username to remove")
+		
 	}
 	
 	@IBAction func signupButtonTapped(_ sender: Any) {
@@ -57,7 +51,7 @@ class SignupViewController: UIViewController {
 			return
 		}
 		guard let password = password_txt_field.text, password.count > 0 else {
-			presentAlert(title: "Username must not be empty", message: "")
+			presentAlert(title: "Password must not be empty", message: "")
 			return
 		}
 
@@ -139,7 +133,6 @@ class SignupViewController: UIViewController {
 	}
 	
 	func presentAlert(title:String, message:String) {
-//		print("ALERT: \(title) Message: \(message)")
 		DispatchQueue.main.async {
 			let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
 			alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
@@ -153,18 +146,18 @@ class SignupViewController: UIViewController {
 		}
 	}
 	
-	func presentAlertTextField(title:String, message:String) {
+	func presentAlertTextField(title:String, placeholder:String) {
 		DispatchQueue.main.async {
-			let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+			let alert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertController.Style.alert)
 			alert.addTextField { textField in
-				textField.placeholder = "Delete Username?"
+				textField.placeholder = placeholder
 			}
 			let confirmAction = UIAlertAction(title: "OK", style: .default) { [weak alert] _ in
 				guard let alert = alert, let textField = alert.textFields?.first else { return }
 				
 				self.networkManager.remove_user(username: textField.text!) { (json) in
 					print("remove user",json)
-					self.presentAlert(title: "User Deleted", message: "")
+					self.presentAlert(title: "User Removed", message: "")
 				}
 			}
 			alert.addAction(confirmAction)
